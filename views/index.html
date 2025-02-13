@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordle Game</title>
+  <link rel="stylesheet" href="/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="/logo.png" alt="Logo" class="rotating-logo">
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button" onclick="window.location.href='/'">Home</button>
+      <button class="nav-button" onclick="window.location.href='/battle'">Battle</button>
+    </div>
+  </nav>
+  <div class="game-container">
+    <div class="canvas-container">
+      <canvas id="board"></canvas>
+    </div>
+    <div class="input-container">
+      <div class="language-select-wrapper">
+        <select id="languageSelect" class="language-select">
+          <option value="english">English</option>
+          <option value="turkish">Turkish</option>
+        </select>
+      </div>
+      <div id="messageBox" class="message-box"></div>
+      <input id="inputBox" type="text" placeholder="Type your guess">
+      <button id="resetButton" class="reset-button">Reset Game</button>
+      <div class="keyboard">
+        <div class="keyboard-row">
+          <button data-key="q">Q</button>
+          <button data-key="w">W</button>
+          <button data-key="e">E</button>
+          <button data-key="r">R</button>
+          <button data-key="t">T</button>
+          <button data-key="y">Y</button>
+          <button data-key="u">U</button>
+          <button data-key="ı">I</button>
+          <button data-key="o">O</button>
+          <button data-key="p">P</button>
+          <button data-key="ğ">Ğ</button>
+          <button data-key="ü">Ü</button>
+        </div>
+        <div class="keyboard-row">
+          <button data-key="a">A</button>
+          <button data-key="s">S</button>
+          <button data-key="d">D</button>
+          <button data-key="f">F</button>
+          <button data-key="g">G</button>
+          <button data-key="h">H</button>
+          <button data-key="j">J</button>
+          <button data-key="k">K</button>
+          <button data-key="l">L</button>
+          <button data-key="ş">Ş</button>
+          <button data-key="i">İ</button>
+        </div>
+        <div class="keyboard-row">
+          <button data-key="z">Z</button>
+          <button data-key="x">X</button>
+          <button data-key="c">C</button>
+          <button data-key="v">V</button>
+          <button data-key="b">B</button>
+          <button data-key="n">N</button>
+          <button data-key="m">M</button>
+          <button data-key="ö">Ö</button>
+          <button data-key="ç">Ç</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>
