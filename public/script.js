@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let opponentId;
   let isBattleMode = window.location.pathname === '/battle';
 
-  // WebSocket connection
-  const ws = new WebSocket(`ws://${window.location.host}`);
+  // WebSocket connection (use wss:// for secure WebSocket)
+  const ws = new WebSocket(`wss://${window.location.host}`);
 
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);
