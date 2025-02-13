@@ -19,7 +19,7 @@ app.get('/battle', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'battle.html'));
 });
 
-// WebSocket for battle mode
+// Store players and their WebSocket connections
 const players = {};
 
 wss.on('connection', (ws) => {
@@ -31,15 +31,22 @@ wss.on('connection', (ws) => {
 
   ws.on('message', (message) => {
     const data = JSON.parse(message);
-    const { type, targetPlayerId, word, isCorrect } = data;
+    const { type, targetPlayerId, word, isCorrect, action } = data;
 
-    if (type === 'join') {
-      // Send the player their ID again (if needed)
-      ws.send(JSON.stringify({ type: 'id', playerId }));
-    } else if (type === 'guess') {
-      // Forward the guess to the target player
+    if (type === 'invite') {
+      // Send a game invite to the opponent
       if (players[targetPlayerId]) {
-        players[targetPlayerId].send(JSON.stringify({ type: 'guess', word, isCorrect }));
+        players[targetPlayerId].send(JSON.stringify({ type: 'invite', fromPlayerId: playerId }));
+      }
+    } else if (type === 'inviteResponse') {
+      // Handle the opponent's response to the invite
+      if (players[targetPlayerId]) {
+        players[targetPlayerId].send(JSON.stringify({ type: 'inviteResponse', fromPlayerId: playerId, action }));
+      }
+    } else if (type === 'progress') {
+      // Update the opponent's progress bar
+      if (players[targetPlayerId]) {
+        players[targetPlayerId].send(JSON.stringify({ type: 'progress', fromPlayerId: playerId, progress: data.progress }));
       }
     } else if (type === 'win') {
       // Notify the opponent that they lost
